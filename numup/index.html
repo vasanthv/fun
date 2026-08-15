@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+  <meta name="description" content="A daily number puzzle. Reach the target using the given numbers and operations." />
+  <meta name="theme-color" media="(prefers-color-scheme: light)" content="#ffffff" />
+  <meta name="theme-color" media="(prefers-color-scheme: dark)" content="#0b0b0b" />
+  <link rel="icon" type="image/svg+xml" href="../favicon.svg" />
+  <title>NumUp - Daily number puzzle</title>
+  <link href="../common.css" rel="stylesheet" />
+  <link href="style.css" rel="stylesheet" />
+</head>
+
+<body>
+  <header id="site-header">
+    <nav id="breadcrumb"><a href="../" class="fun-text">fun</a> / NumUp</nav>
+    <button id="shareBtn" title="Share">
+      <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <circle cx="18" cy="5" r="3" />
+        <circle cx="6" cy="12" r="3" />
+        <circle cx="18" cy="19" r="3" />
+        <line x1="8.59" y1="13.51" x2="15.42" y2="17.49" />
+        <line x1="15.41" y1="6.51" x2="8.59" y2="10.49" />
+      </svg>
+    </button>
+  </header>
+
+  <main id="game">
+    <div id="date-nav">
+      <a id="prevBtn" href="#">&#8592;</a>
+      <span id="date-label"></span>
+      <a id="nextBtn" href="#" class="hidden">&#8594;</a>
+    </div>
+
+    <div id="target-area">
+      <p id="target-label">Target</p>
+      <div id="target-number"></div>
+    </div>
+
+    <div id="error-area" class="hidden">
+      <p id="error-msg"></p>
+    </div>
+
+    <div id="numbers-area">
+      <div id="tiles"></div>
+    </div>
+
+    <div id="ops-area">
+      <button class="op-btn" data-op="+">+</button>
+      <button class="op-btn" data-op="−">−</button>
+      <button class="op-btn" data-op="×">×</button>
+      <button class="op-btn" data-op="÷">÷</button>
+    </div>
+
+    <div id="expression-area">
+      <span id="expression"></span>
+    </div>
+
+    <div id="history-area">
+      <div id="history-list"></div>
+    </div>
+
+    <p id="hint">Pick a number, an operation, then another number.<br>Reuse any result to keep going till you reach the target.</p>
+
+    <div id="action-area">
+      <button id="undoBtn" disabled>Undo</button>
+      <button id="solutionBtn">Solution</button>
+    </div>
+
+    <div id="solution-overlay" class="hidden">
+      <div id="solution-box">
+        <p id="solution-title">One solution</p>
+        <div id="solution-steps"></div>
+        <button id="solution-close">Close</button>
+      </div>
+    </div>
+
+    <div id="solved-banner" class="hidden">
+      <span>🎉</span>
+      <p>You got it!</p>
+    </div>
+  </main>
+
+  <script src="script.js"></script>
+  <script async src="https://cabin.vasanthv.net/hello.js"></script>
+</body>
+
+</html>

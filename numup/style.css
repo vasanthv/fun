@@ -1,0 +1,380 @@
+:root {
+  --tile-bg: #ffffff;
+  --tile-border: #e0dbd4;
+  --tile-border-hover: #aaa;
+  --derived-bg: #fff8f0;
+  --derived-border: #ff7043;
+  --veil: rgba(251, 249, 246, 0.92);
+  --scrim: rgba(44, 61, 81, 0.5);
+  --tile-shadow: rgba(0, 0, 0, 0.09);
+  --tile-shadow-hover: rgba(0, 0, 0, 0.13);
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --tile-bg: #1c1c1c;
+    --tile-border: #333333;
+    --tile-border-hover: #5a5a5a;
+    --derived-bg: #2a1d15;
+    --derived-border: #ff7043;
+    --veil: rgba(11, 11, 11, 0.92);
+    --scrim: rgba(0, 0, 0, 0.65);
+    --tile-shadow: rgba(0, 0, 0, 0.5);
+    --tile-shadow-hover: rgba(0, 0, 0, 0.65);
+  }
+}
+
+.hidden {
+  display: none !important;
+}
+
+#date-nav {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+}
+
+#prevBtn,
+#nextBtn {
+  font-size: 1.2rem;
+  color: var(--hint);
+  text-decoration: none;
+  line-height: 1;
+  transition: color 0.15s;
+}
+
+#prevBtn:hover,
+#nextBtn:hover {
+  color: var(--fg);
+}
+
+#solved-check {
+  color: #27ae60;
+  font-weight: 700;
+}
+
+#date-label {
+  font-size: 0.9rem;
+  color: var(--hint);
+  font-family: system-ui, sans-serif;
+}
+
+#error-area {
+  text-align: center;
+  padding: 2rem 1rem;
+}
+
+#error-area p {
+  font-family: "Fredoka", system-ui, sans-serif;
+  font-size: 1.3rem;
+  color: #f22952;
+  margin: 0;
+}
+
+#game {
+  max-width: 480px;
+  margin: 0 auto;
+  padding: 1rem 1.25rem 3rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.5rem;
+  min-height: calc(100vh - 56px);
+}
+
+#target-area {
+  text-align: center;
+}
+
+#target-label {
+  margin: 0 0 0.25rem;
+  font-size: 0.95rem;
+  color: var(--hint);
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+#target-number {
+  font-family: "Fredoka", system-ui, sans-serif;
+  font-size: 4rem;
+  font-weight: 700;
+  color: var(--fg);
+  line-height: 1;
+}
+
+#numbers-area {
+  width: 100%;
+}
+
+#tiles {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.6rem;
+  justify-content: center;
+}
+
+.tile {
+  font-family: "Fredoka", system-ui, sans-serif;
+  font-size: 1.4rem;
+  font-weight: 600;
+  width: 64px;
+  height: 64px;
+  border-radius: 12px;
+  border: 2px solid transparent;
+  background: var(--tile-bg);
+  box-shadow: 0 2px 8px var(--tile-shadow);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition:
+    transform 0.1s,
+    box-shadow 0.1s,
+    background 0.1s,
+    opacity 0.15s;
+  color: var(--fg);
+  user-select: none;
+  -webkit-tap-highlight-color: transparent;
+  position: relative;
+}
+
+.tile:hover:not(.used):not(.selected) {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 14px var(--tile-shadow-hover);
+}
+
+.tile.selected {
+  background: #f22952;
+  color: #fff;
+  border-color: #f22952;
+  box-shadow: 0 4px 14px rgba(242, 41, 82, 0.3);
+}
+
+.tile.derived {
+  background: var(--derived-bg);
+  border-color: var(--derived-border);
+}
+
+.tile.derived.selected {
+  background: #f22952;
+  border-color: #f22952;
+  color: #fff;
+}
+
+.tile.used {
+  opacity: 0.25;
+  cursor: default;
+  pointer-events: none;
+}
+
+.tile.target-hit {
+  background: #27ae60;
+  color: #fff;
+  border-color: #27ae60;
+  animation: pop 0.35s ease;
+}
+
+@keyframes pop {
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.2);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+#ops-area {
+  display: flex;
+  gap: 0.75rem;
+}
+
+.op-btn {
+  font-family: "Fredoka", system-ui, sans-serif;
+  font-size: 1.5rem;
+  font-weight: 600;
+  width: 60px;
+  height: 60px;
+  border-radius: 12px;
+  border: 2px solid var(--tile-border);
+  background: var(--tile-bg);
+  color: var(--fg);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition:
+    background 0.1s,
+    border-color 0.1s,
+    transform 0.1s;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.op-btn:hover {
+  border-color: var(--tile-border-hover);
+}
+
+.op-btn.selected {
+  background: var(--fg);
+  border-color: var(--fg);
+  color: var(--bg);
+}
+
+#expression-area {
+  font-size: 1.1rem;
+  color: var(--muted);
+  font-family: "Fredoka", system-ui, sans-serif;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+}
+
+#expression:empty::after {
+  content: " ";
+}
+
+#history-area {
+  width: 100%;
+}
+
+#history-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+  align-items: center;
+}
+
+.history-entry {
+  font-size: 1rem;
+  color: var(--hint);
+  font-family: "Fredoka", system-ui, sans-serif;
+  font-weight: 600;
+}
+
+#action-area {
+  display: flex;
+  gap: 0.75rem;
+}
+
+#action-area button {
+  padding: 0.55rem 1.2rem;
+  border-radius: 10px;
+  border: 2px solid var(--tile-border);
+  background: var(--tile-bg);
+  color: var(--fg);
+  font-size: 0.9rem;
+  font-family: system-ui, sans-serif;
+  cursor: pointer;
+  transition:
+    border-color 0.15s,
+    opacity 0.15s;
+}
+
+#action-area button:hover:not(:disabled) {
+  border-color: var(--tile-border-hover);
+}
+
+#action-area button:disabled {
+  opacity: 0.35;
+  cursor: default;
+}
+
+#solved-banner {
+  position: fixed;
+  inset: 0;
+  background: var(--veil);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  z-index: 10;
+  animation: fadeIn 0.3s ease;
+}
+
+#solved-banner span {
+  font-size: 4rem;
+}
+
+#solved-banner p {
+  font-family: "Fredoka", system-ui, sans-serif;
+  font-size: 2rem;
+  font-weight: 700;
+  color: var(--fg);
+  margin: 0 0 1rem;
+}
+
+#solved-banner.hidden {
+  display: none;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+#solution-overlay {
+  position: fixed;
+  inset: 0;
+  background: var(--scrim);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 20;
+  animation: fadeIn 0.2s ease;
+  padding: 1.5rem;
+}
+
+#solution-overlay.hidden {
+  display: none;
+}
+
+#solution-box {
+  background: var(--card);
+  border-radius: 16px;
+  padding: 1.75rem 2rem;
+  max-width: 340px;
+  width: 100%;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.18);
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+#solution-title {
+  margin: 0;
+  font-family: "Fredoka", system-ui, sans-serif;
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: var(--hint);
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.solution-step {
+  font-family: "Fredoka", system-ui, sans-serif;
+  font-size: 1.3rem;
+  font-weight: 600;
+  color: var(--fg);
+}
+
+#solution-close {
+  margin-top: 0.5rem;
+  padding: 0.5rem 1.2rem;
+  border-radius: 10px;
+  border: 2px solid var(--tile-border);
+  background: var(--tile-bg);
+  color: var(--fg);
+  font-size: 0.9rem;
+  cursor: pointer;
+  align-self: flex-end;
+}
+
+#solution-close:hover {
+  border-color: var(--tile-border-hover);
+}

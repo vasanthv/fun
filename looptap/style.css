@@ -1,0 +1,39 @@
+:root {
+  --ink: #2c3d51;
+  --ink-strong: #34495e;
+  --ink-soft: #7f8c8d;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --ink: #ededed;
+    --ink-strong: #ffffff;
+    --ink-soft: #9a9a9a;
+  }
+}
+
+html, body {
+  height: 100%;
+  overflow: hidden;
+  overscroll-behavior: none;
+  user-select: none;
+}
+
+body {
+  display: flex;
+  flex-direction: column;
+}
+
+main {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 0;
+}
+
+#game {
+  display: block;
+  touch-action: none;
+  aspect-ratio: 1;
+}
